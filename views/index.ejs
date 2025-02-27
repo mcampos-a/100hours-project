@@ -9,14 +9,14 @@
 </head>
 <body>
     
-    <h2>This is a template for a CRUD app</h2>
+    <h2>Field Sampler 2.0</h2>
 
     <section data-position="add-quote">
         <h2>Add Well</h2>
     
-        <form action="/quotes" method="POST">
-            <input type="text" placeholder="name" name="name" id="">
-            <input type="text" placeholder="quote" name="quote" id="">
+        <form action="/addWell" method="POST">
+            <input type="text" placeholder="Well Name" name="wellName" id="">
+            <input type="number" placeholder="Date Constructed" name="constructionDate" id="">
             <button type="submit">Submit</button>
         </form>
     
@@ -25,12 +25,13 @@
     <section data-position="quotes">
         <ul class="quotes">
           <!-- Loop through quotes -->
-          <% for(var i = 0; i < quotes.length; i++) {%>
+          <% for(var i = 0; i < info.length; i++) {%>
           <li class="quote">
             <!-- Output name from the iterated quote object -->
-            <span><%= quotes[i].name %></span>:
+            <span><%= info[i].wellName %></span>: Year Constructed:
             <!-- Output quote from the iterated quote object -->
-            <span><%= quotes[i].quote %></span>
+            <span><%= info[i].constructionDate %></span>
+            <span class="fa-trash">🗑️</span>
           </li>
           <% } %>
         </ul>

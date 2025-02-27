@@ -8,7 +8,7 @@ require('dotenv').config()
 let db,
     dbConnecitonString = process.env.DB_STRING,
     dbName = 'Template-Demo',
-    collection 
+    collection  
 //this connects us to our database
 MongoClient.connect(dbConnecitonString)
     .then(client => {
@@ -31,27 +31,38 @@ app.use(cors())
 
 
 app.get('/', async (request, response)=>{
+//reach out to DB and grab collecion of wells
+    collection.find().toArray()
     //It will try something and if it cant do it it will respond with an error
-    try {
-        response.render('index.ejs')
-    } catch (error) {
-        response.status(500).send({message: error.message})
-    }
+    .then(data => {
+        response.render('index.ejs', {info: data})
+    })
+    .catch (error => console.error(error))
 })
 
 //grabs the name and quote submitted
-app.post('/quotes',(req, res)=>{
-    console.log('Hello worldhopper take this form entry. It will go into your mongoDB')
-    console.log(req.body)
-//This will grab what is entered into our name and quote forms and send it to our mongoDB
-    quotesCollection
-        .insertOne(req.body)
+app.post('/addWell',(request, response)=>{
+//This will grab what is entered into our well name and well construction date forms and send it to our mongoDB
+    collection.insertOne({wellName: request.body.wellName,
+        constructionDate: request.body.constructionDate})
         .then(result => {
+            console.log('One well entry added')
+            console.log(request.body)
             // console.log(result)
 //This line redericts the user ot the form/landing page after the submit button is hit
-            res.redirect('/')
+            response.redirect('/')
         })
         .catch(error => console.error(error))
+})
+//Here we are using the http method delete to reach out to our db collection and filtering by well name
+app.delete('/deleteWell', (request, response)=>{
+    collection.deleteOne({wellName: request.body.wellName})
+    .then(result =>{
+        console.log('Well Deleted')
+        response.json('Well Deleted')
+    })
+    .catch(error => console.error(error))
+
 })
 
 //this set up a port to listen for the server
