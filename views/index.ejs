@@ -16,7 +16,7 @@
     
         <form action="/addWell" method="POST">
             <input type="text" placeholder="Well Name" name="wellName" id="">
-            <input type="number" placeholder="Date Constructed" name="constructionDate" id="">
+            <input type="integer" placeholder="Date Constructed" name="constructionDate" id="">
             <button type="submit">Submit</button>
         </form>
     
@@ -24,12 +24,9 @@
 
     <section data-position="quotes">
         <ul class="quotes">
-          <!-- Loop through quotes -->
           <% for(var i = 0; i < info.length; i++) {%>
           <li class="quote">
-            <!-- Output name from the iterated quote object -->
             <span><%= info[i].wellName %></span>: Year Constructed:
-            <!-- Output quote from the iterated quote object -->
             <span><%= info[i].constructionDate %></span>
             <span class="fa-trash">🗑️</span>
           </li>
