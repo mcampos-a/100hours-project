@@ -24,12 +24,12 @@
 
     <section data-position="quotes">
         <ul class="quotes">
-          <% for(var i = 0; i < info.length; i++) {%>
-          <li class="quote">
-            <span><%= info[i].wellName %></span>: Year Constructed:
-            <span><%= info[i].constructionDate %></span>
-            <span class="fa-trash">🗑️</span>
-          </li>
+          <% for(let i = 0; i < info.length; i++) {%>
+            <li class="quote">
+              <span><%= info[i].wellName %></span>: Year Constructed:
+              <span><%= info[i].constructionDate %></span>
+              <span class="fa-trash">🗑️</span>
+           </li>
           <% } %>
         </ul>
       </section>
