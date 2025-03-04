@@ -15,8 +15,8 @@
         <h2>Add Well</h2>
     
         <form action="/addWell" method="POST">
-            <input type="text" placeholder="Well Name" name="wellName" id="">
-            <input type="integer" placeholder="Date Constructed" name="constructionDate" id="">
+            <input type="text" placeholder="Well Name" name="wName" id="">
+            <input type="text" placeholder="Date Constructed" name="constructionDate" id="">
             <button type="submit">Submit</button>
         </form>
     
@@ -26,9 +26,9 @@
         <ul class="quotes">
           <% for(let i = 0; i < info.length; i++) {%>
             <li class="quote">
-              <span><%= info[i].wellName %></span>: Year Constructed:
+              <span><%= info[i].wellName %></span>
               <span><%= info[i].constructionDate %></span>
-              <span class="fa-trash">🗑️</span>
+              <span class='fa-trash'>DELETE</span>
            </li>
           <% } %>
         </ul>

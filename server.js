@@ -32,18 +32,16 @@ app.use(cors())
 
 app.get('/', async (request, response)=>{
 //reach out to DB and grab collecion of wells
-    collection.find().toArray()
+   const wellNames = await collection.find().toArray()
     //It will try something and if it cant do it it will respond with an error
-    .then(data => {
-        response.render('index.ejs', {info: data})
-    })
-    .catch (error => console.error(error))
+    response.render('index.ejs', {info: wellNames})
+    
 })
 
 //grabs the name and quote submitted
 app.post('/addWell',(request, response)=>{
 //This will grab what is entered into our well name and well construction date forms and send it to our mongoDB
-    collection.insertOne({wellName: request.body.wellName,
+    collection.insertOne({wellName: request.body.wName,
         constructionDate: request.body.constructionDate})
         .then(result => {
             console.log('One well entry added')
@@ -56,7 +54,7 @@ app.post('/addWell',(request, response)=>{
 })
 //Here we are using the http method delete to reach out to our db collection and filtering by well name
 app.delete('/deleteWell', (request, response)=>{
-    collection.deleteOne({wellName: request.body.wellName})
+    collection.deleteOne({wellName: request.body.wellNameFromJS})
     .then(result =>{
         console.log('Well Deleted')
         response.json('Well Deleted')

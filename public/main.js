@@ -9,15 +9,15 @@ Array.from(deleteWellText).forEach((element) =>{
 })
 
 async function deleteWell(){
-    const wellName = this.parentNode.childNodes[1].innerText
-    const wellYear = this.parentNode.childNodes[3].innerText
+    const well = this.parentNode.childNodes[1].innerText
+    // const wellYear = this.parentNode.childNodes[3].innerText
     try{
         const response = await fetch('deleteWell', {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                'wellNameS': wellName,
-                'constructionDateS': wellYear
+                'wellNameFromJS': well
+                // 'constructionDateS': wellYear
             })
         })
         const data = await response.json()
