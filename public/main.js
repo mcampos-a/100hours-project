@@ -2,7 +2,7 @@
 
 
 //Info can travel back and forth using the fetch() method
-const deleteWellText = document.querySelector('.fa-trash')
+const deleteWellText = document.querySelectorAll('.deleteWells')
 
 Array.from(deleteWellText).forEach((element) =>{
     element.addEventListener('click', deleteWell)
