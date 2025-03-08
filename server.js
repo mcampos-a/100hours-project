@@ -42,7 +42,13 @@ app.get('/', async (request, response)=>{
 app.post('/addWell',(request, response)=>{
 //This will grab what is entered into our well name and well construction date forms and send it to our mongoDB
     collection.insertOne({wellName: request.body.wName,
-        constructionDate: request.body.constructionDate})
+        constructionDate: request.body.constructionDate,
+        wellDiameter: request.body.wDiameter,
+        wellDepth: request.body.wDepth,
+        staticWL: request.body.wSWL,
+        wellCorrection: request.body.wCorrection,
+        correctedSWL: 0
+    })
         .then(result => {
             console.log('One well entry added')
             console.log(request.body)
@@ -62,6 +68,29 @@ app.delete('/deleteWell', (request, response)=>{
     .catch(error => console.error(error))
 
 })
+//Here we do our update request
+app.put('/calculateWaterLevel', (request, response) => {
+    console.log(request.body.wellNameFromJS)
+    console.log(request.body.staticSWLFromJS)
+    console.log(request.body.correctionFromJS)
+    console.log(request.body.correctedSWLFromJS)
+    collection.updateOne({wellName: request.body.wellNameFromJS,
+        // staticWL: request.body.staticSWLFromJS,
+        // wellCorrection: request.body.correctionFromJS, 
+        correctedSWL: request.body.correctedSWLFromJS        
+    },{
+        $set: {
+            correctedSWL:request.body.correctedSWLFromJS + 3.1416
+          }
+    })
+    .then(result => {
+        console.log('Calcualted cSWL')
+        response.json('Calcualted cSWL')
+    })
+    .catch(error => console.error(error))
+
+})
+
 
 //this set up a port to listen for the server
 //PORT = 8000

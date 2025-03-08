@@ -18,7 +18,12 @@
         <form action="/addWell" method="POST">
             <input type="text" placeholder="Well Name" name="wName" id="">
             <input type="text" placeholder="Date Constructed" name="constructionDate" id="">
+            <input type="number" placeholder="Well Diameter (in)" name="wDiameter" id="">
+            <input type="number" placeholder="Well Depth (ft)" name="wDepth" id="">
+            <input type="number" placeholder="Static Water Level (ft)" name="wSWL" id="">
+            <input type="number" placeholder="Correction (ft)" name="wCorrection" id="">
             <button type="submit">Submit</button>
+            <!-- <span class=".correctedWaterLevel"></span> -->
         </form>
     
       </section>
@@ -29,11 +34,16 @@
             <li class="quote">
               <span><%= info[i].wellName %></span>
               <span><%= info[i].constructionDate %></span>
+              <span><%= info[i].staticWL %></span>
+              <span><%= info[i].wellCorrection %></span>
+              <span><%= info[i].correctedSWL %></span>
+              <span class="correctedWaterLevel">📏</span>
               <span class="deleteWells">🗑️</span>
            </li>
           <% } %>
         </ul>
       </section>
+      
 
     <script src="/main.js"></script>
 </body>
